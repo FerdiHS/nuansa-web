@@ -1,7 +1,9 @@
 name: Preview Deployment
 
 on:
-  push:
+  pull_request:
+    branches:
+      - staging
 
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
