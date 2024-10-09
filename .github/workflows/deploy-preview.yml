@@ -3,6 +3,7 @@ name: Preview Deployment
 on:
   pull_request:
     branches:
+      - main
       - staging
 
 env:
@@ -10,10 +11,18 @@ env:
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
 jobs:
-  deploy-preview:
+  deploy-preproduction-preview:
     uses: ./.github/workflows/deploy.yml
+    if: github.base_ref == 'staging'
     with:
       environment: preproduction
+      preview: true
+    secrets: inherit
+  deploy-production-preview:
+    uses: ./.github/workflows/deploy.yml
+    if: github.base_ref == 'main'
+    with:
+      environment: production
       preview: true
     secrets: inherit
 
