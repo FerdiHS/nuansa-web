@@ -13,14 +13,14 @@ env:
 jobs:
   deploy-preproduction-preview:
     uses: ./.github/workflows/deploy.yml
-    if: github.base_ref == 'staging'
+    if: github.head_ref == 'staging'
     with:
       environment: preproduction
       preview: false
     secrets: inherit
   deploy-production-preview:
     uses: ./.github/workflows/deploy.yml
-    if: github.base_ref == 'main'
+    if: github.head_ref == 'main'
     with:
       environment: production
       preview: false
